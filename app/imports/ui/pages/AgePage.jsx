@@ -19,6 +19,7 @@ class agePage extends React.Component {
               <Button as={NavLink} activeClassName="active" exact to="/PF"
                   style={{ color: 'white', backgroundColor: '#393B44' }} content="Yes, I am." />
               <br/>
+              <br/>
               <Button as={NavLink} activeClassName="active" exact to="/UPF"
                       style={{ color: 'white', backgroundColor: '#393B44' }} content="No, I am not." />
             </Header>
