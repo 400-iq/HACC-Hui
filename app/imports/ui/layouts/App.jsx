@@ -15,18 +15,6 @@ import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signout from '../pages/Signout';
 import withAllSubscriptions from './AllSubscriptionsHOC';
-import { ROLE } from '../../api/role/Role';
-import AgePage from '../pages/developer/AgePage';
-import ParticipationForm from '../pages/developer/ParticipationForm';
-import UnderParticipationForm from '../pages/developer/UnderParticipationForm';
-import Dprofile from '../pages/developer/Dprofile';
-import TeamCreation from '../pages/developer/TeamCreation';
-import { ROUTES } from '../../startup/client/route-constants';
-import DeleteForm from '../pages/developer/DeleteForm';
-import ConfigureHACC from '../pages/administrator/ConfigureHACC';
-import AddChallenge from '../pages/administrator/AddChallenge';
-import AddSkill from '../pages/administrator/AddSkill';
-import AddTool from '../pages/administrator/AddTool';
 
 /**
  * Top-level layout component for this application. Called in imports/startup/client/startup.jsx.
@@ -100,7 +88,7 @@ const AdminProtectedRoute = ({ component: Component, ...rest }) => {
           {...rest}
           render={(props) => {
             const isLogged = Meteor.userId() !== null;
-            const isAdmin = Roles.userIsInRole(Meteor.userId(), ROLE.ADMIN);
+            const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
             return (isLogged && isAdmin) ?
                 (<WrappedComponent {...props} />) :
                 (<Redirect to={{ pathname: '/signin', state: { from: props.location } }} />
