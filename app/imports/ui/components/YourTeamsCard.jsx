@@ -23,10 +23,11 @@ import swal from 'sweetalert';
 import { TeamInvitations } from '../../api/team/TeamInvitationCollection';
 import { Developers } from '../../api/user/DeveloperCollection';
 import { Teams } from '../../api/team/TeamCollection';
-import { defineMethod } from '../../api/base/BaseCollection.methods';
+import { defineMethod, removeItMethod } from '../../api/base/BaseCollection.methods';
 import { TeamDevelopers } from '../../api/team/TeamDeveloperCollection';
 import { WantsToJoin } from '../../api/team/WantToJoinCollection';
 import { Slugs } from '../../api/slug/SlugCollection';
+import { InterestedDevs } from '../../api/team/InterestedDeveloperCollection';
 
 const schema = new SimpleSchema({
   participants: {
@@ -180,6 +181,24 @@ class YourTeamsCard extends React.Component {
 
   }
 
+  leaveTeam(teamID, e) {
+    console.log(e);
+    const tID = teamID;
+    const collectionName2 = InterestedDevs.getCollectionName();
+    // console.log(collectionName2, devID);
+    const intID = InterestedDevs.findDoc({ developerID: devID })._id;
+    // console.log(intID);
+    removeItMethod.call({ collectionName: collectionName2, instance: intID }, (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+        // console.error(error.message);
+      } else {
+        swal('Success', 'Removed Interested Developer', 'success');
+        // console.log('Success');
+      }
+    });
+  }
+
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
     let fRef = null;
@@ -274,6 +293,9 @@ class YourTeamsCard extends React.Component {
 
           <Button id={this.props.teams._id} style={{ backgroundColor: 'transparent' }}>
             <Link to={`/edit-team/${this.props.teams._id}`}>Edit Team</Link>
+          </Button>
+          <Button id={this.props.teams._id} style={{ backgroundColor: 'transparent' }}>
+            <Link to={`/edit-team/${this.props.teams._id}`}>Leave Team</Link>
           </Button>
         </Item>
     );
