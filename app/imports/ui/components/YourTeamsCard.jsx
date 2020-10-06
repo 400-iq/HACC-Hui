@@ -187,11 +187,10 @@ class YourTeamsCard extends React.Component {
     const devID = dID;
     console.log(tID);
     console.log(dID);
-    console.log(thisTeam);
     const collectionName = TeamDevelopers.getCollectionName();
     console.log(collectionName, devID);
     const leaveID = InterestedDevs.findDoc({ developerID: devID })._id;
-    console.log(intID);
+    console.log(leaveID);
     removeItMethod.call({ collectionName: collectionName, instance: leaveID }, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
