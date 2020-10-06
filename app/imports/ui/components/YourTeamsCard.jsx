@@ -181,23 +181,28 @@ class YourTeamsCard extends React.Component {
 
   }
 
-  leaveTeam(teamID, e) {
+  leaveTeam(teamID, dID, e) {
     console.log(e);
     const tID = teamID;
-    const collectionName2 = InterestedDevs.getCollectionName();
-    // console.log(collectionName2, devID);
-    const intID = InterestedDevs.findDoc({ developerID: devID })._id;
-    // console.log(intID);
-    removeItMethod.call({ collectionName: collectionName2, instance: intID }, (error) => {
+    const devID = dID;
+    console.log(tID);
+    console.log(dID);
+    console.log(thisTeam);
+    const collectionName = TeamDevelopers.getCollectionName();
+    console.log(collectionName, devID);
+    const leaveID = InterestedDevs.findDoc({ developerID: devID })._id;
+    console.log(intID);
+    removeItMethod.call({ collectionName: collectionName, instance: leaveID }, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
-        // console.error(error.message);
+        console.error(error.message);
       } else {
-        swal('Success', 'Removed Interested Developer', 'success');
+        swal('Success', 'Left', 'success');
         // console.log('Success');
       }
     });
   }
+
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
