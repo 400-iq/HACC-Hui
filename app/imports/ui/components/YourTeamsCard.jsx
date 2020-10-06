@@ -25,7 +25,6 @@ import { Developers } from '../../api/user/DeveloperCollection';
 import { Teams } from '../../api/team/TeamCollection';
 import { defineMethod, removeItMethod } from '../../api/base/BaseCollection.methods';
 import { TeamDevelopers } from '../../api/team/TeamDeveloperCollection';
-import { WantsToJoin } from '../../api/team/WantToJoinCollection';
 import { Slugs } from '../../api/slug/SlugCollection';
 import { InterestedDevs } from '../../api/team/InterestedDeveloperCollection';
 
@@ -93,7 +92,9 @@ class YourTeamsCard extends React.Component {
     if (notFoundParticipants.length > 0) {
       swal('Error',
           `Sorry, we could not find participant(s): \n${notFoundParticipants.join(', ')}
-          \n\nPlease double check that their emails are inputted correctly and that they have registered with the HACC-HUI Slackbot.`,
+          // eslint-disable-next-line max-len
+          \n\nPlease double check that their emails are inputted
+          correctly and that they have registered with the HACC-HUI Slackbot.`,
           'error');
       return;
     }
@@ -201,7 +202,6 @@ class YourTeamsCard extends React.Component {
       }
     });
   }
-
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
