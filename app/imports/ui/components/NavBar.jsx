@@ -3,23 +3,26 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Header } from 'semantic-ui-react';
+import { Menu, Dropdown, Header, Sidebar, Segment, Icon, Image } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../api/role/Role';
 import { ROUTES } from '../../startup/client/route-constants';
+import SideBar from './SideBar';
 
 /**
  * The NavBar appears at the top of every page. Rendered by the App Layout component.
  * @memberOf ui/components
  */
 class NavBar extends React.Component {
+
   render() {
     const isAdmin = this.props.currentUser && Roles.userIsInRole(Meteor.userId(), ROLE.ADMIN);
     const isDeveloper = this.props.currentUser && Roles.userIsInRole(Meteor.userId(), ROLE.DEVELOPER);
-    console.log(isDeveloper);
+    // console.log(isDeveloper);
     const menuStyle = { marginBottom: '10px' };
+
     return (
-        <Menu style={menuStyle} attached="top" borderless inverted>
+        <Menu style={menuStyle} attached="top" borderless inverted stackable>
           <Menu.Item as={NavLink} activeClassName="" exact to={ROUTES.LANDING}>
             <Header inverted as='h1'>HACC-Hui</Header>
           </Menu.Item>
@@ -31,11 +34,13 @@ class NavBar extends React.Component {
                 <Menu.Item as={NavLink} activeClassName="active" exact
                            to={ROUTES.TEAM_FINDER} key='team-finder'>Team Finder</Menu.Item>,
                 <Menu.Item as={NavLink} activeClassName="active" exact
-                           to={ROUTES.ALL_DEVELOPERS} key='all-developers'>All Developers</Menu.Item>,
+                           to={ROUTES.ALL_DEVELOPERS} key='all-developers'>All
+                  Developers</Menu.Item>,
                 <Menu.Item as={NavLink} activeClassName="active" exact
                            to={ROUTES.YOUR_TEAMS} key='your-teams'>Your Teams</Menu.Item>,
                 <Menu.Item as={NavLink} activeClassName="active" exact
-                           to={ROUTES.TEAM_INVITATIONS} key='team-invitations'>Your Team Invitations</Menu.Item>,
+                           to={ROUTES.TEAM_INVITATIONS} key='team-invitations'>Your Team
+                  Invitations</Menu.Item>,
                 <Menu.Item as={NavLink} activeClassName="active" exact to={ROUTES.EDIT_PROFILE}
                            key='edit-profile'>Edit
                   Your Profile</Menu.Item>,
